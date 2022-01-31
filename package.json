@@ -1,0 +1,23 @@
+{
+  "name": "Junior-FED-Onbording",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adirma/Junior-FED-Onbording.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adirma/Junior-FED-Onbording/issues"
+  },
+  "homepage": "https://github.com/adirma/Junior-FED-Onbording#readme",
+  "devDependencies": {
+    "webpack-cli": "^4.9.2"
+  }
+}
