@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
-    <script src="src/app.js"></script>
+    <script src="src/index.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
         <h2 >TO DO List</h2>
     </center>
     <br>
-    <br>
+
     <div>
         <center>
             <tr>
@@ -33,12 +33,15 @@
                     <button type="button" onClick="addNewRow()" >add task </button>
                 </th>
             </tr>
+            <br>
+            <br>
             <table id="table">
                 <tr>
                     <th>title</th>
                     <th>update date</th>
                     <th>expired date</th>
                     <th>status</th>
+                    <th></th>
 
                 </tr>
                 <tr>
@@ -47,8 +50,7 @@
                     <td>05/02/2022</td>
                     <td>active</td>
                     <td><input type="button" value="Delete Row" onclick="SomeDeleteRowFunction(this)">
-                        <input type="button" value="mark Row" onclick="SomeDeleteRowFunction(this)">
-                    
+                        <input type="button" value="mark Row" onclick="markRow(this)">
                     </td>
                 </tr>
             </table>
