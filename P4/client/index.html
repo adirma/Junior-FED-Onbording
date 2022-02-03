@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="src/index.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color:rgba(132, 252, 128, 0.664);">
+    <center>
+        <h2 >TO DO List</h2>
+    </center>
+    <br>
+
+    <div>
+        <center>
+            <tr>
+                <th>
+                    <label for="title">Title:</label>
+                </th>
+                <th>
+                    <input type="text" id="title" name="title" required minlength="4" maxlength="8" size="10">
+                </th>
+                <th>
+                    <label for="date">expired Date:</label>
+                </th>
+                <th>
+                    <input type="text" id="date" name="date" required minlength="4" maxlength="10" size="10">
+                </th>
+                <th>
+                    <button type="button" onClick="addNewTask()" >add task </button>
+                </th>
+            </tr>
+            <br>
+            <br>
+            <table id="table">
+                <tr>
+                    <th>title</th>
+                    <th>update date</th>
+                    <th>expired date</th>
+                    <th>status</th>
+                    <th></th>
+
+                </tr>
+            </table>
+        </center>
+
+    </div>
+    
+</body>
+</html>
