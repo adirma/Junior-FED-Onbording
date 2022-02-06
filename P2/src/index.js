@@ -30,7 +30,6 @@ function markRow(o){
 }
 
 function init(){
-    console.log(JSON.parse(localStorage.getItem('table')))
     let table = document.getElementById("table");
     table.innerHTML=JSON.parse(localStorage.getItem('table'))
 
