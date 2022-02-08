@@ -10,22 +10,15 @@ router.use(
     })
 )
 
+router.use(Express.json());
+
 router.listen(port,()=>console.log("listen to port "+port));
-
-router.post('/',(req,res)=>{
-    res.send("Hello world")
-})
-
-router.get('/',(req,res)=>{
-    res.send("Hello")
-})
 
 router.post('/addNewTask/:title-:date',(req,res)=>{
    const param=req.params;
    const title=param.title;
    const date=param.date;
    const tasks=todo.addNewTask(title,date);
-   console.log(param,tasks)
    res.send(tasks)
 })
 
@@ -53,6 +46,21 @@ router.post('/markTask/:title',(req,res)=>{
 router.get('/getAllTasks',(req,res)=>{
     const tasks=todo.getAllTask();
     res.send(tasks)
+})
+
+
+router.get('/getAllUserTasks/:userid',(req,res)=>{
+    const param=req.params;
+    const userid=param.userid;
+    const tasks=todo.getUserTable(userid);
+    res.send(tasks)
+})
+
+router.post('/setUserTasks/:userid',(req,res)=>{
+    const param=req.params;
+    const userid=param.userid;
+    let strTable=req.body.table.toString();
+   const tasks=todo.setUserTable(userid,strTable);
 })
 
 

@@ -2,6 +2,35 @@ var dataset={
     tasks:[],
 }
 var taskIndex=[]
+var usesDatasets={
+    users:[
+        {
+    userid:"1",
+    table:"\n <tbody><tr>\n <th>title</th>\n <th>update date</th>\n <th>expired date</th>\n <th>status</th>\n <th></th>\n\n </tr>\n <tr id=\"regular_row\"><td>ff</td><td>2/6/2022</td><td>ff</td><td>active</td><td><input type=\"button\" value=\"Delete Row\" onclick=\"SomeDeleteRowFunction(this)\"><input type=\"button\" value=\"mark Row\" onclick=\"markRow(this)\"></td></tr></tbody>"
+    }
+]
+}
+var userIdIndex=["1"]
+
+export function getUserTable(userId){
+    const index=userIdIndex.indexOf(userId) ;
+    if(index<0)
+        return;
+    return usesDatasets.users[index].table;
+}
+
+export function setUserTable(userId,htmlTable){
+    const index=userIdIndex.indexOf(userId) ;
+    if(index<0){
+        userIdIndex.push(userId);
+        usesDatasets.users.push({
+            userid:userId,
+            table:htmlTable
+        })
+        return;
+    }
+    usesDatasets.users[index].table=htmlTable;
+}
 
 export function addNewTask(taskTitle,taskExpiredDate){
     const task={  title:taskTitle,

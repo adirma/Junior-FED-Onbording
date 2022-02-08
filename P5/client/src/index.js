@@ -1,3 +1,5 @@
+var userId;
+
 function addNewRow(title,expiredDate,updateDate,status,mark){
     let table = document.getElementById("table");
     var row = table.insertRow(1);
@@ -13,6 +15,7 @@ function addNewRow(title,expiredDate,updateDate,status,mark){
     cell4.innerHTML=status;
     cell5.innerHTML='<td><input type="button" value="Delete Row" onclick="SomeDeleteRowFunction(this)"><input type="button" value="mark Row" onclick="markRow(this)"></td>'
     save();
+    saveUserTable();
 }
 
 function addNewTask(){
@@ -26,8 +29,6 @@ function addNewTask(){
       'Content-Type': 'application/json',
         },
     }).then(res=>console.log(res))
-
-    
 }
 
 function SomeDeleteRowFunction(o) {
@@ -42,7 +43,8 @@ function SomeDeleteRowFunction(o) {
         },
     }).then(res=>{return res.json()})
     .then(res=>{console.log(res)})
-    save()
+    save();
+    saveUserTable();
 
 }
 
@@ -72,9 +74,8 @@ function markRow(o){
         .then(res=>{console.log(res)})
 
     }
-    save()
-
-
+    save();
+    saveUserTable();
 }
 
 function init(){
@@ -111,4 +112,38 @@ function save(){
     console.log("save")
     let table = document.getElementById('table');
     Cookies.set('table',JSON.stringify(table.innerHTML))
+}
+
+function loadUserId(){
+    userId= document.getElementById("userId").value;
+    fetch(`http://localhost:3000/getAllUserTasks/${userId}`,{
+        method: 'GET', // or 'PUT'
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+            },
+        })
+        .then(res=>{return res.text()})
+        .then(res=>{
+            let table = document.getElementById('table');
+            table.innerHTML=res.substring(3,res.length-1);
+        })
+}
+
+function saveUserTable(){
+    const table = document.getElementById('table');
+    console.log(JSON.stringify(table.innerHTML))
+    const data={table:JSON.stringify(table.innerHTML)};
+    userId= document.getElementById("userId").value;
+    if(!userId) 
+        return;
+    fetch(`http://localhost:3000/setUserTasks/${userId}`,{
+        method: 'POST', // or 'PUT'
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+            },
+        body: JSON.stringify(data),
+        })
+        .then(res=>{return res.text()})
 }
