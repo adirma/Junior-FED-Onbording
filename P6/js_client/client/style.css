@@ -1,0 +1,21 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
+  }
+  
+tr {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    background-color: azure;
+  }
+
+  #mark_row {
+    background-color: yellow;
+  }
+
+  #regular_row {
+    background-color: azure;
+  }
+  

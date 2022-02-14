@@ -1,4 +1,4 @@
 
-GET http://localhost:3000/getAllUserTasks/1
+GET https://adirma.wixsite.com/my-site-15/_functions-dev/fullDataTest/
 
 
