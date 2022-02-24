@@ -1,0 +1,13 @@
+.parent {
+    background: rgb(160, 160, 159);
+    padding: 1rem;
+  }
+  .child {
+
+    padding: 1.5rem;
+    
+  }
+
+.float-child {
+    display: inline-flex;
+  }

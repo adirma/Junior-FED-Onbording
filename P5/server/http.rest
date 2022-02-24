@@ -1,4 +1,4 @@
 
-GET https://adirma.wixsite.com/my-site-15/_functions-dev/fullDataTest/
+GET https://adirma.wixsite.com/wix-members-test/_functions-dev/fullMembersTest/
 
 

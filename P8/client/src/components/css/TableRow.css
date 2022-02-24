@@ -1,0 +1,21 @@
+
+  .cell{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 20%;
+    border-color: black;
+    border: 2px solid;
+    text-align: center;
+    font-family:Snell Roundhand, cursive;
+    font-size: 24px;
+
+  }
+  
+  #mark_row {
+    background-color: yellow;
+  }
+
+  #regular_row {
+    background-color: azure;
+  }
+  

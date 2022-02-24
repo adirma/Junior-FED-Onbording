@@ -1,0 +1,38 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 70%;
+    border-color: black;
+    background-color: rgb(70, 70, 70);
+  }
+
+  .cell_label{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 20%;
+    border-color: black;
+    border: 1px solid;
+    text-align: center;
+
+  }
+
+  .form__group{
+    color: #111;
+    font-family: 'Helvetica Neue', sans-serif; 
+    font-size: 21px;
+    font-weight: bold; 
+    letter-spacing: 1px; 
+}
+.form__field{
+    background-color: white !important;
+}
+
+  
+  #mark_row {
+    background-color: yellow;
+  }
+
+  #regular_row {
+    background-color: azure;
+  }
+  
