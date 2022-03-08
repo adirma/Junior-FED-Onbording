@@ -1,52 +1,32 @@
 import { MainAppTitle } from "./components/MainAppTitle";
 import { AppContainer } from "./components/AppContainer";
 
+
 import { Button_styled } from "./components/Button_styled";
 import TaskTableLabels from "./components/TaskTableLabels";
 import TableRow from "./components/TableRow";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import AddNewTask from "./components/AddNewTask";
 import LoginBar from "./components/LoginBar";
-import {init} from './components/script/index.js'
+import {init,addNewTask,deleteServerTask} from './components/script/index.js'
 
 import "./components/css/TaskTableLabels.css";
 import "./components/css/TableRow.css";
 import "./components/css/AddNewTask.css";
+import "./components/css/LoginBar.css";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      title: "test 0",
-      expiredDate: "01/01/2023",
-      updateDate: new Date().toLocaleDateString().split(",")[0],
-      status: "active",
-      mark: "regular_row",
-    },
-    {
-      title: "test 1",
-      expiredDate: "01/01/2023",
-      updateDate: new Date().toLocaleDateString().split(",")[0],
-      status: "active",
-      mark: "regular_row",
-    },
-    {
-      title: "test 2",
-      expiredDate: "01/01/2023",
-      updateDate: new Date().toLocaleDateString().split(",")[0],
-      status: "active",
-      mark: "regular_row",
-    },
-  ]);
+  const [tasks, setTasks] = useState([]);
 
-  const deleteTask = (title) => {
-    console.log("delete " + title);
+  const deleteTask = async (title) => {
+    await deleteServerTask(title);
     setTasks(tasks.filter((task) => task.title !== title));
     const index = tasks.indexOf(title);
     if (index > -1) tasks.tasks.splice(index, 1);
   };
 
   const addTask = (title,expiredDate) => {
-    console.log("add")
+    addNewTask(expiredDate,title);
    const task= {
       title: title,
       expiredDate: expiredDate,
@@ -58,11 +38,11 @@ function App() {
     setTasks([...tasks, task]);
   };
 
-  const initTask = async () => {
-    const oldTasks=await init()
-    setTasks([...tasks, ...oldTasks]);
-  };
-  //initTask()
+ useEffect(async () => {
+   const data=await init();
+   console.log(data)
+   setTasks(data)
+ },[])
 
   return (
     <AppContainer
@@ -81,8 +61,7 @@ function App() {
         ></AddNewTask>
         <br />
         <br />
-        <LoginBar></LoginBar>
-
+          <LoginBar />
         <br />
         <TaskTableLabels
           tasks={tasks}
@@ -92,6 +71,7 @@ function App() {
       </center>
     </AppContainer>
   );
-}
+    }
+
 
 export default App;

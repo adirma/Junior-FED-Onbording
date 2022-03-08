@@ -1,27 +1,17 @@
 import Cookies from 'js-cookie'
 var userId;
-export function addNewRow(title,expiredDate,updateDate,status,mark){
-    let table = document.getElementById("table");
-    var row = table.insertRow(1);
-    row.id=mark
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    var cell5 = row.insertCell(4);
-    cell1.innerHTML=title;
-    cell2.innerHTML=updateDate;
-    cell3.innerHTML=expiredDate;
-    cell4.innerHTML=status;
-    cell5.innerHTML='<td><input type="button" value="Delete Row" onclick="SomeDeleteRowFunction(this)"><input type="button" value="mark Row" onclick="markRow(this)"></td>'
-    save();
-    saveUserTable();
+
+export function init(){
+    return fetch('http://localhost:3000/getAllTasks',{
+    method: 'GET', // or 'PUT'
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+        },
+    }).then(res=>{return res.json()})
 }
 
-export function addNewTask(){
-    var title = document.getElementById("title").value;
-    var expiredDate = document.getElementById("date").value;
-    addNewRow(title,expiredDate,new Date().toLocaleDateString().split(",")[0],'active','regular_row');
+export function addNewTask(expiredDate,title){
     fetch(`http://localhost:3000/addNewTask/${title}-${expiredDate}`,{
     method: 'POST', // or 'PUT'
     headers: {
@@ -31,10 +21,7 @@ export function addNewTask(){
     }).then(res=>console.log(res))
 }
 
-export function SomeDeleteRowFunction(o) {
-    var p=o.parentNode.parentNode;
-    p.parentNode.removeChild(p);
-    var title=p.childNodes[0].innerHTML;
+export function deleteServerTask(title) {
     fetch(`http://localhost:3000/removeTask/${title}`,{
     method: 'POST', // or 'PUT'
     headers: {
@@ -43,9 +30,21 @@ export function SomeDeleteRowFunction(o) {
         },
     }).then(res=>{return res.json()})
     .then(res=>{console.log(res)})
-    save();
-    saveUserTable();
+}
 
+export function saveUserTable(userId,data){
+    userId= document.getElementById("userId").value;
+    if(!userId) 
+        return;
+    fetch(`http://localhost:3000/setUserTasks/${userId}`,{
+        method: 'POST', // or 'PUT'
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+            },
+        body: JSON.stringify(data),
+        })
+        .then(res=>{return res.text()})
 }
 
 export function markRow(o){
@@ -78,40 +77,17 @@ export function markRow(o){
     saveUserTable();
 }
 
-export function init(){
-    //let table = document.getElementById("table");
-    //let oldTable = Cookies.get('table');
-    //if(oldTable){
-    //    table.innerHTML=JSON.parse(oldTable);
-    //    return 
-    //}
-    return fetch('http://localhost:3000/getAllTasks',{
-    method: 'GET', // or 'PUT'
-    headers: {
-        "Access-Control-Allow-Origin": "*",
-      'Content-Type': 'application/json',
-        },
-    }).then(res=>{return res.json()})
-    //.then(res=>{buildTable(res)})
-}
 
-export function buildTable(tasks){
-    let table = document.getElementById("table");
-    table.innerHTML="<tr><th>title</th><th>update date</th><th>expired date</th><th>status</th><th></th></tr>"
-    tasks.forEach(task => {
-        addNewRow(task.title,task.expiredDate,task.updateDate,task.status,task.mark)
-        }
-    );
-}
-
-window.addEventListener("DOMContentLoaded", function() {
-    init();
-}, false);
-
-export function save(){
-    console.log("save")
-    let table = document.getElementById('table');
-    Cookies.set('table',JSON.stringify(table.innerHTML))
+export function save(data){
+    fetch(`http://localhost:3000/setUserTasks/${userId}`,{
+        method: 'POST', // or 'PUT'
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+            },
+        body: JSON.stringify(data),
+        })
+        .then(res=>{return res.text()})
 }
 
 export function loadUserId(){
@@ -130,20 +106,3 @@ export function loadUserId(){
         })
 }
 
-export function saveUserTable(){
-    const table = document.getElementById('table');
-    console.log(JSON.stringify(table.innerHTML))
-    const data={table:JSON.stringify(table.innerHTML)};
-    userId= document.getElementById("userId").value;
-    if(!userId) 
-        return;
-    fetch(`http://localhost:3000/setUserTasks/${userId}`,{
-        method: 'POST', // or 'PUT'
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-          'Content-Type': 'application/json',
-            },
-        body: JSON.stringify(data),
-        })
-        .then(res=>{return res.text()})
-}
