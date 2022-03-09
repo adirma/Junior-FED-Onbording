@@ -4,7 +4,7 @@ import * as mytodo from './toDoList';
 import mycors from "cors";
 const myRouter=express();
 const myPort=3000;
-
+const database={adir:"123",tzuf:"123"}
 
 myRouter.use(
     mycors({
@@ -50,7 +50,6 @@ myRouter.get('/getAllTasks',(req,res)=>{
     res.send(tasks)
 })
 
-
 myRouter.get('/getAllUserTasks/:userid',(req,res)=>{
     const param=req.params;
     const userid=param.userid;
@@ -63,5 +62,13 @@ myRouter.post('/setUserTasks/:userid',(req,res)=>{
     const userid=param.userid;
     let strTable=req.body.table.toString();
    const tasks=mytodo.setUserTable(userid,strTable);
+})
+
+myRouter.get('/login/:userName-:password',(req,res)=>{
+    const param=req.params;
+    const userName=param.userName;
+    const password=param.password;
+    const result=(database.adir===password || database.tzuf===password) ?"true":"false";
+    res.send(result)
 })
 

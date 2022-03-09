@@ -106,3 +106,13 @@ export function loadUserId(){
         })
 }
 
+export async function userAuth(userName,password){
+    return fetch(`http://localhost:3000/login/${userName}-${password}`,{
+        method: 'GET', // or 'PUT'
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+            },
+        }).then(res=>{return res.text()})
+}
+

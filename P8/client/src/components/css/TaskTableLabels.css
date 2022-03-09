@@ -1,9 +1,9 @@
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 70%;
+    width: 100%;
     border-color: black;
-    background-color: rgb(70, 70, 70);
+    background-color: rgb(173, 173, 173);
   }
 
   .cell_label{
@@ -17,6 +17,7 @@ table {
   }
 
   .form__group{
+    
     color: #111;
     font-family: 'Helvetica Neue', sans-serif; 
     font-size: 21px;
